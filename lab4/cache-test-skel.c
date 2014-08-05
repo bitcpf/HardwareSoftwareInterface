@@ -105,19 +105,20 @@ int get_cache_assoc(int size) {
 	for(i=0;i<assoc;i++)
 	{
 		access_cache(start+i*step);
-								    }									    access_cache(start+assoc*step);
-											    if(access_cache(start))
-													    {
-															        assoc*=2;
-																	        array = blocks/assoc;
-																			    }
-												    else
-														    {
-																        break;
-																		    }
-													  }
+	}
+	access_cache(start+assoc*step);
+	if(access_cache(start))
+	{
+		assoc*=2;
+		array = blocks/assoc;
+	}
+    	else
+	{
+	break;
+	}
+   }
 				    
-				    return assoc;
+   return assoc;
 
 
 
