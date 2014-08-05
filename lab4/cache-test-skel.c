@@ -91,23 +91,21 @@ int get_cache_size(int size) {
 int get_cache_assoc(int size) {
   /* YOUR CODE GOES HERE */
   int cache_size = get_cache_size(0);
-    int block_size = get_block_size();
-	  int blocks = cache_size/block_size;
-	    int assoc = 1;
-		  int array = blocks/assoc;
-		    int i;
-			  addr_t step;
-			    addr_t start = start = 0x80400000L;
-
-				  while(1)
-					    {
-							    flush_cache();
-								    step = cache_size*array;
-									    for(i=0;i<assoc;i++)
-											    {
-													        access_cache(start+i*step);
-															    }
-										    access_cache(start+assoc*step);
+  int block_size = get_block_size();
+  int blocks = cache_size/block_size;
+  int assoc = 1;
+  int array = blocks/assoc;
+  int i;
+  addr_t step;
+  addr_t start = start = 0x80400000L;
+  while(1)
+  {
+	flush_cache();
+	step = cache_size*array;
+	for(i=0;i<assoc;i++)
+	{
+		access_cache(start+i*step);
+								    }									    access_cache(start+assoc*step);
 											    if(access_cache(start))
 													    {
 															        assoc*=2;
